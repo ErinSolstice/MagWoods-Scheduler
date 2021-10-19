@@ -1,0 +1,197 @@
+<ScreenManager>:
+	id: screen_manager
+#	TimeOffScreen:
+#		id: 'TimeOffScreen'
+#		name: 'TimeOffScreen'
+#		manager: screen_manager
+	ScheduleScreen:
+		id: 'ScheduleScreen'
+		name: 'ScheduleScreen'
+		manager: screen_manager
+
+<TimeOffScreen>:
+	id: 'TimeOffScreen'
+	name: 'TimeOffScreen'
+#	dropdown: DropDown
+	mainbutton: mainButton
+
+	BoxLayout:
+		orientation: "vertical"
+		
+		Label:
+			id: output_label
+			size_hint_y: 1
+
+		Button:
+			id: mainButton
+			text: 'Select Employee'
+			width: 150
+			height: 45
+			size_hint: (None, None)
+
+		GridLayout:
+			cols: 7
+			size_hint_y: 2
+			Button:
+				text: 'Save to\nPermanent'
+				on_press: root.writeCSV('permanent')
+			Button:
+				text: 'Save for\nWeek'
+				on_press: root.writeCSV('temporary')
+			Button:
+				text: 'Clear All\nTime Off'
+				on_press: root.clearAllTimeOff()
+			Button:
+				text: 'Clear\nTime Off'
+				on_press: root.clearTimeOff()
+			Button:
+				text: 'Week Off'
+				on_press: root.weekOff()
+			Button:
+				text: 'Make\nSchedule'
+				on_press: root.makeSchedule()
+			Button:
+				text: 'Change Screen'
+				on_release: root.manager.current = 'ScheduleScreen'
+			Button:
+				on_press: root.initialize()
+			Button: 
+				id: tue1
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Tuesday\n10:30-3:00"
+				on_press: root.button_press('tue1')
+			Button:
+				id: wed1
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Wednesday\n10:30-3:00"
+				on_press: root.button_press('wed1')
+			Button:
+				id: thu1
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Thursday\n10:30-3:00"
+				on_press: root.button_press('thu1')
+			Button:
+				id: fri1
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Friday\n10:30-3:00"
+				on_press: root.button_press('fri1')
+			Button:
+				id: sat1
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Saturday\n10:30-3:00"
+				on_press: root.button_press('sat1')
+			Button:
+				on_press: root.writeCSV()
+			Button:
+				id: mon1
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Monday\n1:30-7:30"
+				on_press: root.button_press('mon1')
+			Button:
+				id: tue2
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Tuesday\n3:00-7:30"
+				on_press: root.button_press('tue2')
+			Button:
+				id: wed2
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Wednesday\n3:00-7:30"
+				on_press: root.button_press('wed2')
+			Button:
+				id: thu2
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Thursday\n3:00-7:30"
+				on_press: root.button_press('thu2')
+			Button:
+				id: fri2
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Friday\n3:00-7:30"
+				on_press: root.button_press('fri2')
+			Button:
+				id: sat2
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Saturday\n3:00-7:30"
+				on_press: root.button_press('sat2')
+			Button:
+				id: sun1
+				background_normal: ''
+				background_color: (1, 1, 1, 1)
+				color: (0, 0, 0, 1)
+				text: "Sunday\n1:30-7:30"
+				on_press: root.button_press('sun1')
+
+<ScheduleScreen>:
+	GridLayout:
+		cols: 8
+		Button:
+			text: 'Change Screen'
+			on_release: root.manager.current = ''
+		Label:
+			text: 'Monday'
+		Label:
+			text: 'Tuesday'
+		Label:
+			text: 'Wednesday'
+		Label:
+			text: 'Thursday'
+		Label:
+			text: 'Friday'
+		Label:
+			text: 'Saturday'
+		Label:
+			text: 'Sunday'
+		Label:
+			text: 'morning'
+		Button:
+			text: 'Update'
+			on_press: root.update()
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[1]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[3]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[5]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[7]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[9]])
+		Label:
+			text:
+		Label:
+			text: 'afternoon'
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[0]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[2]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[4]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[6]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[8]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[10]])
+		Label:
+			text: '\n'.join([person['name'] for person in root.shifts[11]])
